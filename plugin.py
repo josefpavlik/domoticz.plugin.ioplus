@@ -1,17 +1,13 @@
-# MagaIO
+# IOplus
 #
 # Author: Jet 2020
 # based on HTML.py example
 #
-# todo:
-# megaio 0 awrite 2000
-# 
-# megaio 0 aread 7
 #
 """
-<plugin key="MegaIO" name="Raspberry MegaIO" author="Jet" version="0.1" externallink="">
+<plugin key="IOplus" name="Raspberry IOplus" author="Jet" version="0.1" externallink="">
     <description>
-    MegaIO 8 relay board on raspberry
+    IOplus 8 relay board on raspberry
     </description>
     <params>
         <param field="Mode1" label="board number" width="75px" default="0"/>
@@ -23,7 +19,7 @@ import Domoticz
 import os
 import subprocess
 import re
-import megaio
+import libioplus as ioplus
 
 class BasePlugin:
     board = 0
@@ -35,7 +31,7 @@ class BasePlugin:
 #        if (self.debug): Domoticz.Log("set_relay exec "+command)
         if self.debug: Domoticz.Log("set_relay "+str(Unit)+" to "+str(val))
 #        os.system(command)
-        megaio.set_relay(self.board, Unit, int(val))
+        ioplus.setRelayCh(self.board, Unit, int(val))
     
     def __init__(self):
         return
@@ -74,7 +70,7 @@ class BasePlugin:
 
     def onHeartbeat(self):
         if self.running:
-          val=megaio.get_relays(self.board)
+          val=ioplus.getRelays(self.board)
           if (self.debug): Domoticz.Log("read relays -> %02x" % val)
           for Unit in range(1,8):
             val1=(val >> (Unit-1)) & 1
