@@ -1,4 +1,4 @@
-# domoticz.plugin.megaio
+# domoticz.plugin.ioplus
 Domoticz plugin for IOplus 8 relay board on raspberry
 https://sequentmicrosystems.com/product/raspberry-pi-home-automation-card/
 
