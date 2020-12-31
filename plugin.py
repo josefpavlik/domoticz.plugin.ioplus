@@ -25,9 +25,6 @@
 # units 9-16 are inputs
 
 import Domoticz
-import os
-import subprocess
-import re
 import libioplus as ioplus
 
 class BasePlugin:
@@ -36,10 +33,7 @@ class BasePlugin:
     debug = 0
    
     def set_relay(self,Unit, val):
-#        command="megaio "+self.board+" rwrite " + str(Unit) + " "+(val and "on" or "off") 
-#        if (self.debug): Domoticz.Log("set_relay exec "+command)
         if self.debug: Domoticz.Log("set_relay "+str(Unit)+" to "+str(val))
-#        os.system(command)
         ioplus.setRelayCh(self.board, Unit, int(val))
     
     def __init__(self):
@@ -82,23 +76,13 @@ class BasePlugin:
         if self.running:
           val=ioplus.getRelays(self.board)
           inp=ioplus.getOpto(self.board)
-          if (self.debug): Domoticz.Log("read relays -> %02x, inputs -> %02x" % val,inp)
+          if (self.debug): Domoticz.Log("read relays -> %02x, inputs -> %02x" % (val,inp))
           for Unit in range(1,9):
             val1=(val >> (Unit-1)) & 1
             inp1=(inp >> (Unit-1)) & 1
             if (Unit in Devices): Devices[Unit].Update(int(val1),str(val1))
             if (Unit+8 in Devices): Devices[Unit+8].Update(int(inp1),str(val1))
-            
-#            command="megaio "+self.board+" rread "+str(Unit)
-#            val=os.popen(command).read()
-#            try:
-#              int(val)
-#              if (Unit in Devices): Devices[Unit].Update(int(val),val)
-#            except:
-#              if (self.debug): Domoticz.Log(command+" got value"+val)
-#            if (self.debug): Domoticz.Log("read cmd "+command+" result="+val)
 
-      
 
 global _plugin
 _plugin = BasePlugin()
