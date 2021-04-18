@@ -1,6 +1,6 @@
 # domoticz.plugin.ioplus
 Domoticz plugin for IOplus 8 relay board on raspberry
-https://sequentmicrosystems.com/product/raspberry-pi-home-automation-card/
+https://sequentmicrosystems.com/collections/all-io-cards/products/raspberry-pi-home-automation-card
 
 INSTALL:
 * cd ~/domoticz/plugins
