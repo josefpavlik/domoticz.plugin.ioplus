@@ -3,7 +3,10 @@ Domoticz plugin for IOplus 8 relay board on raspberry
 https://sequentmicrosystems.com/product/raspberry-pi-home-automation-card/
 
 INSTALL:
-Clone the repository to ~/domoticz/plugins and restart domoticz
+* cd ~/domoticz/plugins
+* git clone https://github.com/josefpavlik/domoticz.plugin.ioplus.git
+* sudo apt install python3-rpi.gpio python3-smbus 
+* sudo service domoticz restart
 
 SETUP:
 Go to the Hardware menu and create new hardware of type "Raspberry IOplus". Set the board id. 
